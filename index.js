@@ -20,7 +20,7 @@ async function run() {
       repo: ctx.repo.repo,
     });
 
-    console.log(lastIssues);
+    console.log(lastIssues.data);
   } catch (error) {
     core.debug(error.message);
   }
