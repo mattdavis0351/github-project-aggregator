@@ -49,9 +49,10 @@ async function run() {
           }
         }`,
       },
-      { owner: context.repo.owner, repo: context.repo.repo }
+      { owner: ctx.repo.owner, repo: ctx.repo.repo }
     );
     console.log("success");
+    console.log(lastIssues);
   } catch (error) {
     core.debug(error.message);
   }
