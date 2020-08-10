@@ -15,13 +15,8 @@ async function run() {
   const ctx = github.context;
 
   try {
-    // const lastIssues = await octokit.issues.listForRepo({
-    //   owner: ctx.repo.owner,
-    //   repo: ctx.repo.repo,
-    // });
-
     const q = `query listForRepo($repo:String!, $owner:String!){
-        repository(owner: $owner, name:$repo){
+        repository(owner: "$owner", name:"$repo"){
             issues(last: 5) {
                 edges {
                     node {
