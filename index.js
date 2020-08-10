@@ -51,6 +51,8 @@ async function run() {
     const res = await octokit.graphql(q);
     if (!res) {
       console.log(`something failed with the query... it's empty`);
+    } else {
+      console.log(`there is a response`);
     }
   } catch (error) {
     core.debug(error.message);
