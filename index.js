@@ -21,8 +21,7 @@ async function run() {
     // });
 
     const q = `query {
-        viewer{
-            login
+        repository(owner:${ctx.repo.owner}, name:${ctx.repo.repo}){
             issues(last: 5) {
                 edges {
                     node {
