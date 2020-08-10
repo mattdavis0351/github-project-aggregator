@@ -20,8 +20,8 @@ async function run() {
     //   repo: ctx.repo.repo,
     // });
 
-    const q = `query {
-        repository(owner:${ctx.repo.owner}, name:${ctx.repo.repo}){
+    const q = `query listForRepo($repo:String!, $owner:String!){
+        repository(owner: $owner, name:$repo){
             issues(last: 5) {
                 edges {
                     node {
@@ -31,9 +31,14 @@ async function run() {
             }
         }
     }`;
+
+    const v = {
+      name: ctx.repo.repo,
+      owner: ctx.repo.owner,
+    };
     console.log(q);
     console.log(`owner: ${ctx.repo.owner} repo: ${ctx.repo.repo}`);
-    const gql = await octokit.graphql(q);
+    const gql = await octokit.graphql(q, v);
 
     console.log(gql);
   } catch (error) {
