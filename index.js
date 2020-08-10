@@ -31,7 +31,7 @@ async function run() {
             }
         }
     }`;
-
+    console.log(q);
     const gql = await octokit.graphql(q);
 
     console.log(gql);
