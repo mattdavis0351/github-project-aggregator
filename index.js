@@ -15,8 +15,8 @@ async function run() {
   const ctx = github.context;
 
   try {
-    const { lastIssues } = await octokit.graphql({
-      query: `query {
+    const { lastIssues } = await octokit.graphql(
+      `query {
           repository(owner:${ctx.repo.owner}, name:${ctx.repo.repo}) {
             issues(last:5) {
               edges {
@@ -26,8 +26,8 @@ async function run() {
               }
             }
           }
-        }`,
-    });
+        }`
+    );
 
     console.log(typeof lastIssues);
   } catch (error) {
