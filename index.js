@@ -51,7 +51,7 @@ async function run() {
       },
       { owner: context.repo.owner, repo: context.repo.repo }
     );
-    console.log(lastIssues);
+    console.log("success");
   } catch (error) {
     core.debug(error.message);
   }
