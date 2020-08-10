@@ -34,7 +34,7 @@ async function run() {
     // const vars = {
     //   label: labels,
     // };
-    console.log(labels);
+    // console.log(labels);
     const { lastIssues } = await octokit.graphql({
       query: `query {
           repository(owner:${ctx.repo.owner}, name:${ctx.repo.repo}) {
