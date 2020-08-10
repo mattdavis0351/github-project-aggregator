@@ -22,7 +22,7 @@ async function run() {
 
     console.log(lastIssues.data);
   } catch (error) {
-    core.debug(error.message);
+    console.log(error.message);
   }
 }
 
