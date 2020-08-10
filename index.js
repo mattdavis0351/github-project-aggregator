@@ -32,6 +32,7 @@ async function run() {
         }
     }`;
     console.log(q);
+    console.log(`owner: ${ctx.repo.owner} repo: ${ctx.repo.repo}`);
     const gql = await octokit.graphql(q);
 
     console.log(gql);
