@@ -33,7 +33,7 @@ async function run() {
     // const vars = {
     //   label: labels,
     // };
-    // console.log(labels);
+    console.log(labels);
     const { issues } = await octokit.graphql(
       `query issues($label: [String!]){ 
         viewer { 
@@ -54,7 +54,7 @@ async function run() {
         label: labels,
       }
     );
-    console.log(labels);
+    // core.info(labels);
     // console.log(JSON.stringify(issues));
   } catch (error) {
     core.debug(error.message);
