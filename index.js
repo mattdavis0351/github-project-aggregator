@@ -1,5 +1,6 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const { context } = require("@actions/github/lib/utils");
 
 async function run() {
   const token = core.getInput("token");
@@ -34,23 +35,22 @@ async function run() {
     //   label: labels,
     // };
     console.log(labels);
-    const q = `query{
-        viewer {
-          issues(labels: "bug", first: 5) {
-            edges {
-              node {
-                title
-                repository {
-                  nameWithOwner
+    const { lastIssues } = await octokit.graphql({
+      query: `query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
+          repository(owner:$owner, name:$repo) {
+            issues(last:$num) {
+              edges {
+                node {
+                  title
                 }
               }
             }
           }
-        }
-      }`;
-    console.log(q);
-    const res = await octokit.graphql(q);
-    console.log(res.data);
+        }`,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+    });
+    console.log(lastIssues);
   } catch (error) {
     core.debug(error.message);
   }
