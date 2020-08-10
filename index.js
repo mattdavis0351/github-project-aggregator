@@ -33,7 +33,7 @@ async function run() {
     }`;
 
     const v = {
-      name: ctx.repo.repo,
+      repo: ctx.repo.repo,
       owner: ctx.repo.owner,
     };
     console.log(q);
