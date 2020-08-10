@@ -15,12 +15,25 @@ async function run() {
   const ctx = github.context;
 
   try {
-    const lastIssues = await octokit.issues.listForRepo({
-      owner: ctx.repo.owner,
-      repo: ctx.repo.repo,
-    });
+    // const lastIssues = await octokit.issues.listForRepo({
+    //   owner: ctx.repo.owner,
+    //   repo: ctx.repo.repo,
+    // });
 
-    const gql = await octokit.graphql(`query {viewer{login}}`);
+    const q = `query {
+        viewer{
+            login
+            issues(last: 5) {
+                edges {
+                    node {
+                        title
+                    }
+                }
+            }
+        }
+    }`;
+
+    const gql = await octokit.graphql(q);
 
     console.log(gql);
   } catch (error) {
