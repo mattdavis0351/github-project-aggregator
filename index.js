@@ -35,27 +35,23 @@ async function run() {
     // };
     console.log(labels);
     const { issues } = await octokit.graphql(
-      `query issues($label: [String!]){ 
-        viewer { 
-          issues(labels: $label, first: 50) {
+      `{
+        viewer {
+          issues(labels: "bug", first: 5) {
             edges {
               node {
-                title,
-                repository{
+                title
+                repository {
                   nameWithOwner
                 }
-                
               }
             }
           }
         }
-      }`,
-      {
-        label: labels,
-      }
+      }`
     );
     // core.info(labels);
-    // console.log(JSON.stringify(issues));
+    console.log(JSON.stringify(issues.title));
   } catch (error) {
     core.debug(error.message);
   }
