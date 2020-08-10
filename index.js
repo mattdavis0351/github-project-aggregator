@@ -34,7 +34,7 @@ async function run() {
     //   label: labels,
     // };
     console.log(labels);
-    const q = `{
+    const q = `query{
         viewer {
           issues(labels: "bug", first: 5) {
             edges {
@@ -50,11 +50,7 @@ async function run() {
       }`;
     console.log(q);
     const res = await octokit.graphql(q);
-    if (!res) {
-      console.log(`something failed with the query... it's empty`);
-    } else {
-      console.log(`there is a response`);
-    }
+    console.log(res.data);
   } catch (error) {
     core.debug(error.message);
   }
