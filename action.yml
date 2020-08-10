@@ -7,16 +7,16 @@ description: Combines multiple GitHub project boards into one... yay!
 inputs:
   projectName: #must have the same owner, stretch goal let someone specify the projectID
     description: Name of the parent project board
-    required: true
+    required: false
   labels: # comma list of labels on issue to care about
     description: Comma separated list of issue labels to care about
-    required: true
+    required: false
   repos: # comma list of owner/repo to query
     description: Comma separated list of repositories to monitor for issues with identified labels, in owner/repository format
-    required: true
+    required: false
   token: # must be scoped across all repos and orgs in "repos" above
     description: Personal Access Token scoped for multiple repos which are listed above
-    required: true
+    required: false
 
 runs:
   using: "node12"
