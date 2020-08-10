@@ -16,25 +16,6 @@ async function run() {
   const ctx = github.context;
 
   try {
-    // const query = `query issues($label: [String!]){
-    //     viewer {
-    //       issues(labels: $label, first: 50) {
-    //         edges {
-    //           node {
-    //             title,
-    //             repository{
-    //               nameWithOwner
-    //             }
-
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }`;
-    // const vars = {
-    //   label: labels,
-    // };
-    // console.log(labels);
     const { lastIssues } = await octokit.graphql({
       query: `query {
           repository(owner:${ctx.repo.owner}, name:${ctx.repo.repo}) {
@@ -48,8 +29,8 @@ async function run() {
           }
         }`,
     });
-    console.log("success");
-    console.log(lastIssues);
+
+    console.log(typeof lastIssues);
   } catch (error) {
     core.debug(error.message);
   }
