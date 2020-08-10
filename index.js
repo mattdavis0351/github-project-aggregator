@@ -34,8 +34,7 @@ async function run() {
     //   label: labels,
     // };
     console.log(labels);
-    const issues = await octokit.graphql(
-      `{
+    const q = `{
         viewer {
           issues(labels: "bug", first: 5) {
             edges {
@@ -48,10 +47,9 @@ async function run() {
             }
           }
         }
-      }`
-    );
-    console.log(`non stringify ${issues}`);
-    console.log(JSON.stringify(issues));
+      }`;
+    const res = await octokit.graphql(q);
+    console.log(Object.keys(res));
   } catch (error) {
     core.debug(error.message);
   }
