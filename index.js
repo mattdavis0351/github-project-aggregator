@@ -3,7 +3,7 @@ const github = require("@actions/github");
 
 async function run() {
   const token = core.getInput("token");
-  const labels = core.getInput("labels").split(",");
+  const labels = core.getInput("labels").trim().split(",");
   const repos = core.getInput("repos");
   const projectName = core.getInput("projectName");
   const octokit = github.getOctokit(token);
@@ -30,7 +30,7 @@ async function run() {
     };
     console.log(labels);
     const { issues } = await octokit.graphql(query, vars);
-    console.log(issues);
+    console.log(JSON.stringify(issues));
   } catch (error) {
     core.debug(error.message);
   }
