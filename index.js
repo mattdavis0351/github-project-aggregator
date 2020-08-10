@@ -32,9 +32,11 @@ async function run() {
       owner: ctx.repo.owner,
     };
 
-    const gql = await octokit.graphql(q, v);
+    const { repository } = await octokit.graphql(q, v);
 
-    console.log(gql);
+    repository.issues.edges.forEach((el) => {
+      console.log(el);
+    });
   } catch (error) {
     console.log(error.message);
   }
