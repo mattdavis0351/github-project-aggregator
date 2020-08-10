@@ -10,9 +10,29 @@ async function run() {
   const ctx = github.context;
 
   try {
-    const query = `query issues($labels: [String!]{ 
+    // const query = `query issues($label: [String!]){
+    //     viewer {
+    //       issues(labels: $label, first: 50) {
+    //         edges {
+    //           node {
+    //             title,
+    //             repository{
+    //               nameWithOwner
+    //             }
+
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }`;
+    // const vars = {
+    //   label: labels,
+    // };
+    // console.log(labels);
+    const { issues } = await octokit.graphql(
+      `query issues($label: [String!]){ 
         viewer { 
-          issues(labels: $labels, first: 50) {
+          issues(labels: $label, first: 50) {
             edges {
               node {
                 title,
@@ -24,12 +44,11 @@ async function run() {
             }
           }
         }
-      }`;
-    const vars = {
-      labels: labels,
-    };
-    console.log(labels);
-    const { issues } = await octokit.graphql(query, vars);
+      }`,
+      {
+        label: labels,
+      }
+    );
     console.log(JSON.stringify(issues));
   } catch (error) {
     core.debug(error.message);
