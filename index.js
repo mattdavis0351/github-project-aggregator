@@ -20,7 +20,9 @@ async function run() {
       repo: ctx.repo.repo,
     });
 
-    console.log(lastIssues.data);
+    const gql = await octokit.graphql(`query {viewer{login}}`);
+
+    console.log(gql);
   } catch (error) {
     console.log(error.message);
   }
