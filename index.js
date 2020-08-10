@@ -49,7 +49,9 @@ async function run() {
         }
       }`;
     const res = await octokit.graphql(q);
-    console.log(Object.keys(res));
+    if (!res) {
+      console.log(`something failed with the query... it's empty`);
+    }
   } catch (error) {
     core.debug(error.message);
   }
