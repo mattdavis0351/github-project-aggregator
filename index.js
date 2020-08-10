@@ -15,8 +15,8 @@ async function run() {
   const ctx = github.context;
 
   try {
-    const q = `query listForRepo($repo:String!, $owner:String!){
-        repository(owner: "$owner", name:"$repo"){
+    const q = `query listForRepo($owner:String!, $repo:String!){
+        repository(owner: $owner, name: $repo){
             issues(last: 5) {
                 edges {
                     node {
