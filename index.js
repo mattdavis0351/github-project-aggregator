@@ -29,7 +29,7 @@ async function run() {
       labels: labels,
     };
     const issuesQuery = await octokit.graphql(query, vars);
-    core.info(JSON.stringify(issuesQuery));
+    core.info(String(issuesQuery));
   } catch (error) {
     core.debug(error);
   }
