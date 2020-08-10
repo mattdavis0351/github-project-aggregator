@@ -35,11 +35,10 @@ async function run() {
     //   label: labels,
     // };
     console.log(labels);
-    const { lastIssues } = await octokit.graphql(
-      {
-        query: `query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
-          repository(owner:$owner, name:$repo) {
-            issues(last:$num) {
+    const { lastIssues } = await octokit.graphql({
+      query: `query {
+          repository(owner:${ctx.repo.owner}, name:${ctx.repo.repo}) {
+            issues(last:5) {
               edges {
                 node {
                   title
@@ -48,9 +47,7 @@ async function run() {
             }
           }
         }`,
-      },
-      { owner: ctx.repo.owner, repo: ctx.repo.repo }
-    );
+    });
     console.log("success");
     console.log(lastIssues);
   } catch (error) {
