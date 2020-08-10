@@ -35,8 +35,9 @@ async function run() {
     //   label: labels,
     // };
     console.log(labels);
-    const { lastIssues } = await octokit.graphql({
-      query: `query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
+    const { lastIssues } = await octokit.graphql(
+      {
+        query: `query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
           repository(owner:$owner, name:$repo) {
             issues(last:$num) {
               edges {
@@ -47,9 +48,9 @@ async function run() {
             }
           }
         }`,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-    });
+      },
+      { owner: context.repo.owner, repo: context.repo.repo }
+    );
     console.log(lastIssues);
   } catch (error) {
     core.debug(error.message);
